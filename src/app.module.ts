@@ -17,11 +17,11 @@ import { InquiriesModule } from './inquiries/inquiries.module';
   imports: [
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: dbConfig.host,
-      port: dbConfig.port,
-      username: dbConfig.username,
-      password: dbConfig.password,
-      database: dbConfig.database,
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       autoLoadModels: dbConfig.autoLoadModels,
       synchronize: dbConfig.synchronize,
       sync: { force: false },
