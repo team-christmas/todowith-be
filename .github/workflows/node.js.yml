@@ -52,5 +52,5 @@ jobs:
             sudo docker rm todowith-be
             sudo docker rmi brinst07/todowith-be
             sudo docker pull brinst07/todowith-be
-            sudo docker run -d -p 5000:5000 --name todowith-be brinst07/todowith-be:latest
+            sudo docker run --env-file ./env.list -d -p 5000:5000 --name todowith-be brinst07/todowith-be:latest
           '
