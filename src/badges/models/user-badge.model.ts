@@ -8,7 +8,7 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript';
-import { ON_DELETE_OPTIONS } from 'src/common/constants';
+import { OnDeleteOptions } from 'src/common/constants';
 import { User } from 'src/users/models/user.model';
 import { Badge } from './badge.model';
 
@@ -20,7 +20,7 @@ export class UserBadge extends Model {
   @Column
   userId: number;
 
-  @BelongsTo(() => User, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
   user: User;
 
   @PrimaryKey
@@ -29,7 +29,7 @@ export class UserBadge extends Model {
   @Column
   badgeId: number;
 
-  @BelongsTo(() => Badge, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => Badge, { onDelete: OnDeleteOptions.CASCADE })
   badge: Badge;
 
   @CreatedAt

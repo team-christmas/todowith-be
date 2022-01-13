@@ -9,7 +9,7 @@ import {
   Model,
   Table
 } from 'sequelize-typescript';
-import { ON_DELETE_OPTIONS } from 'src/common/constants';
+import { OnDeleteOptions } from 'src/common/constants';
 import { Goal } from 'src/goals/models/goal.model';
 import { Hashtag } from './hashtag.model';
 import { Sticker } from './sticker.model';
@@ -39,7 +39,7 @@ export class Todo extends Model {
   @Column
   goalId: number;
 
-  @BelongsTo(() => Goal, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => Goal, { onDelete: OnDeleteOptions.CASCADE })
   goal: Goal;
 
   @HasMany(() => Sticker)

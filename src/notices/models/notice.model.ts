@@ -7,7 +7,7 @@ import {
   Model,
   Table
 } from 'sequelize-typescript';
-import { ON_DELETE_OPTIONS } from 'src/common/constants';
+import { OnDeleteOptions } from 'src/common/constants';
 import { File } from 'src/files/models/file.model';
 
 @Table
@@ -23,6 +23,6 @@ export class Notice extends Model {
   @Column
   fileId: number;
 
-  @BelongsTo(() => File, { onDelete: ON_DELETE_OPTIONS.SET_NULL })
+  @BelongsTo(() => File, { onDelete: OnDeleteOptions.SET_NULL })
   file: File;
 }

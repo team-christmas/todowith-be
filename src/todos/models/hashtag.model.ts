@@ -1,5 +1,5 @@
 import { AllowNull, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { ON_DELETE_OPTIONS } from 'src/common/constants';
+import { OnDeleteOptions } from 'src/common/constants';
 import { Todo } from './todo.model';
 
 @Table
@@ -9,7 +9,7 @@ export class Hashtag extends Model {
   @Column
   todoId: number;
 
-  @BelongsTo(() => Todo, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => Todo, { onDelete: OnDeleteOptions.CASCADE })
   todo: Todo;
 
   @AllowNull(false)
