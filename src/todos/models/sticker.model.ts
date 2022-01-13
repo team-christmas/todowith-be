@@ -3,12 +3,12 @@ import {
   BelongsTo,
   Column,
   CreatedAt,
+  DataType,
   ForeignKey,
-  IsIn,
   Model,
   Table
 } from 'sequelize-typescript';
-import { ON_DELETE_OPTIONS, STICKER_TYPES } from 'src/common/constants';
+import { OnDeleteOptions, StickerTypes } from 'src/common/constants';
 import { User } from 'src/users/models/user.model';
 import { Todo } from './todo.model';
 
@@ -19,7 +19,7 @@ export class Sticker extends Model {
   @Column
   userId: number;
 
-  @BelongsTo(() => User, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
   user: User;
 
   @ForeignKey(() => Todo)
@@ -27,13 +27,12 @@ export class Sticker extends Model {
   @Column
   todoId: number;
 
-  @BelongsTo(() => Todo, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => Todo, { onDelete: OnDeleteOptions.CASCADE })
   todo: Todo;
 
   @AllowNull(false)
-  @IsIn([[STICKER_TYPES.THUMS_UP]])
-  @Column
-  type: string;
+  @Column({ type: DataType.ENUM({ values: Object.keys(StickerTypes) }) })
+  type: StickerTypes;
 
   @CreatedAt
   createdDate: Date;

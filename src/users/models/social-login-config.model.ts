@@ -1,14 +1,13 @@
 import {
   AllowNull,
   Column,
+  DataType,
   ForeignKey,
   IsEmail,
-  IsIn,
   Model,
-  PrimaryKey,
   Table
 } from 'sequelize-typescript';
-import { SOCIAL_LOGIN_PLATFORMS } from 'src/common/constants';
+import { SocialLoginPlatforms } from 'src/common/constants';
 import { User } from './user.model';
 
 @Table
@@ -19,9 +18,8 @@ export class SocialLoginConfig extends Model {
   userId: number;
 
   @AllowNull(false)
-  @IsIn([[SOCIAL_LOGIN_PLATFORMS.KAKAO]])
-  @Column
-  platform: string;
+  @Column({ type: DataType.ENUM({ values: Object.keys(SocialLoginPlatforms) }) })
+  platform: SocialLoginPlatforms;
 
   @AllowNull(false)
   @IsEmail

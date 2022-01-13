@@ -1,15 +1,15 @@
 import {
   AllowNull,
   Column,
+  DataType,
   Default,
   ForeignKey,
-  IsIn,
   Model,
   PrimaryKey,
   Table
 } from 'sequelize-typescript';
+import { AppThemes } from 'src/common/constants';
 import { User } from './user.model';
-import { APP_THEMES } from 'src/common/constants';
 
 @Table
 export class UserConfig extends Model {
@@ -19,10 +19,9 @@ export class UserConfig extends Model {
   userId: number;
 
   @AllowNull(false)
-  @IsIn([[APP_THEMES.SYSTEM, APP_THEMES.LIGHT, APP_THEMES.DARK]])
-  @Default(APP_THEMES.SYSTEM)
-  @Column
-  appTheme: string;
+  @Default(AppThemes.SYSTEM)
+  @Column({ type: DataType.ENUM({ values: Object.keys(AppThemes) }) })
+  appTheme: AppThemes;
 
   @AllowNull(false)
   @Default(false)

@@ -3,14 +3,14 @@ import {
   BelongsTo,
   BelongsToMany,
   Column,
+  DataType,
   Default,
   ForeignKey,
-  IsIn,
   Model,
   PrimaryKey,
   Table
 } from 'sequelize-typescript';
-import { GOAL_COLORS, GOAL_PUBLIC_OPTIONS, ON_DELETE_OPTIONS } from 'src/common/constants';
+import { GoalColors, GoalPublicOptions, OnDeleteOptions } from 'src/common/constants';
 import { User } from 'src/users/models/user.model';
 
 @Table
@@ -20,7 +20,7 @@ export class Goal extends Model {
   @Column
   userId: number;
 
-  @BelongsTo(() => User, { onDelete: ON_DELETE_OPTIONS.CASCADE })
+  @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
   user: User;
 
   @AllowNull(false)
@@ -28,18 +28,14 @@ export class Goal extends Model {
   name: string;
 
   @AllowNull(false)
-  @IsIn([[GOAL_COLORS.GRAY]])
-  @Default(GOAL_COLORS.GRAY)
-  @Column
-  color: string;
+  @Default(GoalColors.GRAY)
+  @Column({ type: DataType.ENUM({ values: Object.keys(GoalColors) }) })
+  color: GoalColors;
 
   @AllowNull(false)
-  @IsIn([
-    [GOAL_PUBLIC_OPTIONS.FULL_PUBLIC, GOAL_PUBLIC_OPTIONS.SOME_PUBLIC, GOAL_PUBLIC_OPTIONS.PRIVATE]
-  ])
-  @Default(GOAL_PUBLIC_OPTIONS.PRIVATE)
-  @Column
-  publicOption: string;
+  @Default(GoalPublicOptions.PRIVATE)
+  @Column({ type: DataType.ENUM({ values: Object.keys(GoalPublicOptions) }) })
+  publicOption: GoalPublicOptions;
 
   @BelongsToMany(() => User, () => UserToShowGoal)
   usersToShow: User[];
