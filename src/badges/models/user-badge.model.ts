@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AllowNull,
   BelongsTo,
@@ -18,6 +19,7 @@ export class UserBadge extends Model {
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '사용자 ID' })
   userId: number;
 
   @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
@@ -27,11 +29,13 @@ export class UserBadge extends Model {
   @ForeignKey(() => Badge)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '배지 ID' })
   badgeId: number;
 
   @BelongsTo(() => Badge, { onDelete: OnDeleteOptions.CASCADE })
   badge: Badge;
 
   @CreatedAt
+  @ApiProperty({ description: '획득 날짜' })
   acquiredDate: Date;
 }

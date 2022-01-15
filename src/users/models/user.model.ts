@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AllowNull,
   BelongsTo,
@@ -10,7 +11,6 @@ import {
   Unique
 } from 'sequelize-typescript';
 import { Badge } from 'src/badges/models/badge.model';
-import { UserBadge } from 'src/badges/models/user-badge.model';
 import { OnDeleteOptions } from 'src/common/constants';
 import { Follow } from 'src/follows/models/follow.model';
 import { BoostmodeConfig } from './boostmode-config.model';
@@ -22,10 +22,12 @@ export class User extends Model {
   @AllowNull(false)
   @Unique
   @Column
+  @ApiProperty({ description: '닉네임', uniqueItems: true })
   nickname: string;
 
   @ForeignKey(() => Badge)
   @Column
+  @ApiProperty({ description: '대표 배지 ID', required: false })
   repBadgeId: number;
 
   @BelongsTo(() => Badge, { onDelete: 'SET NULL' })

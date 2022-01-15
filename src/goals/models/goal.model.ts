@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AllowNull,
   BelongsTo,
@@ -18,6 +19,7 @@ export class Goal extends Model {
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '사용자 ID' })
   userId: number;
 
   @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
@@ -25,6 +27,7 @@ export class Goal extends Model {
 
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '목표 이름' })
   name: string;
 
   @AllowNull(false)
@@ -35,6 +38,11 @@ export class Goal extends Model {
   @AllowNull(false)
   @Default(GoalPublicOptions.PRIVATE)
   @Column({ type: DataType.ENUM({ values: Object.keys(GoalPublicOptions) }) })
+  @ApiProperty({
+    description: '공개 옵션',
+    enum: GoalPublicOptions,
+    default: GoalPublicOptions.PRIVATE
+  })
   publicOption: GoalPublicOptions;
 
   @BelongsToMany(() => User, () => UserToShowGoal)
@@ -46,10 +54,12 @@ export class UserToShowGoal extends Model {
   @PrimaryKey
   @ForeignKey(() => Goal)
   @Column
+  @ApiProperty({ description: '목표 ID' })
   goalId: number;
 
   @PrimaryKey
   @ForeignKey(() => User)
   @Column
+  @ApiProperty({ description: '공개할 대상 사용자 ID' })
   userToShowId: number;
 }

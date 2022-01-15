@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AllowNull,
   Column,
@@ -15,14 +16,21 @@ export class SocialLoginConfig extends Model {
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '사용자 ID' })
   userId: number;
 
   @AllowNull(false)
   @Column({ type: DataType.ENUM({ values: Object.keys(SocialLoginPlatforms) }) })
+  @ApiProperty({
+    description: '플랫폼',
+    enum: SocialLoginPlatforms,
+    default: SocialLoginPlatforms.KAKAO
+  })
   platform: SocialLoginPlatforms;
 
   @AllowNull(false)
   @IsEmail
   @Column
+  @ApiProperty({ description: '이메일' })
   email: string;
 }

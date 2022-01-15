@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AllowNull,
   BelongsTo,
@@ -17,6 +18,7 @@ export class Sticker extends Model {
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '스티커를 남긴 사용자 ID' })
   userId: number;
 
   @BelongsTo(() => User, { onDelete: OnDeleteOptions.CASCADE })
@@ -25,6 +27,7 @@ export class Sticker extends Model {
   @ForeignKey(() => Todo)
   @AllowNull(false)
   @Column
+  @ApiProperty({ description: '투두 ID' })
   todoId: number;
 
   @BelongsTo(() => Todo, { onDelete: OnDeleteOptions.CASCADE })
@@ -32,8 +35,10 @@ export class Sticker extends Model {
 
   @AllowNull(false)
   @Column({ type: DataType.ENUM({ values: Object.keys(StickerTypes) }) })
+  @ApiProperty({ description: '스티커 타입', enum: StickerTypes })
   type: StickerTypes;
 
   @CreatedAt
+  @ApiProperty({ description: '등록 날짜' })
   createdDate: Date;
 }
