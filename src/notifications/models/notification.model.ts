@@ -30,7 +30,7 @@ export class Notification extends Model {
   content: string;
 
   @AllowNull(false)
-  @Column({ type: DataType.ENUM({ values: Object.keys(NotificationTypes) }) })
+  @Column({ type: DataType.ENUM({ values: Object.values(NotificationTypes) }) })
   @ApiProperty({ description: '알림 타입', enum: NotificationTypes })
   type: NotificationTypes;
 
