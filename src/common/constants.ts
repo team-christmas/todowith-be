@@ -29,8 +29,3 @@ export enum GoalPublicOptions {
   SOME_PUBLIC = 'some public',
   PRIVATE = 'private'
 }
-
-// TODO Update sticker types
-export enum StickerTypes {
-  THUMS_UP = 'thums up'
-}

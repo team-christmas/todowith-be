@@ -13,7 +13,6 @@ import {
 import { OnDeleteOptions } from 'src/common/constants';
 import { Goal } from 'src/goals/models/goal.model';
 import { Hashtag } from './hashtag.model';
-import { Sticker } from './sticker.model';
 
 @Table({ updatedAt: false })
 export class Todo extends Model {
@@ -48,9 +47,6 @@ export class Todo extends Model {
 
   @BelongsTo(() => Goal, { onDelete: OnDeleteOptions.CASCADE })
   goal: Goal;
-
-  @HasMany(() => Sticker)
-  stickers: Sticker[];
 
   @HasMany(() => Hashtag)
   hashtags: Hashtag[];
