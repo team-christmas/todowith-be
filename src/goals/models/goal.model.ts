@@ -32,12 +32,12 @@ export class Goal extends Model {
 
   @AllowNull(false)
   @Default(GoalColors.GRAY)
-  @Column({ type: DataType.ENUM({ values: Object.keys(GoalColors) }) })
+  @Column({ type: DataType.ENUM({ values: Object.values(GoalColors) }) })
   color: GoalColors;
 
   @AllowNull(false)
   @Default(GoalPublicOptions.PRIVATE)
-  @Column({ type: DataType.ENUM({ values: Object.keys(GoalPublicOptions) }) })
+  @Column({ type: DataType.ENUM({ values: Object.values(GoalPublicOptions) }) })
   @ApiProperty({
     description: '공개 옵션',
     enum: GoalPublicOptions,

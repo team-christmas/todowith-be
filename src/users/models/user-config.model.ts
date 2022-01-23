@@ -22,7 +22,7 @@ export class UserConfig extends Model {
 
   @AllowNull(false)
   @Default(AppThemes.SYSTEM)
-  @Column({ type: DataType.ENUM({ values: Object.keys(AppThemes) }) })
+  @Column({ type: DataType.ENUM({ values: Object.values(AppThemes) }) })
   @ApiProperty({ description: '앱 테마', enum: AppThemes, default: AppThemes.SYSTEM })
   appTheme: AppThemes;
 

@@ -20,7 +20,7 @@ export class SocialLoginConfig extends Model {
   userId: number;
 
   @AllowNull(false)
-  @Column({ type: DataType.ENUM({ values: Object.keys(SocialLoginPlatforms) }) })
+  @Column({ type: DataType.ENUM({ values: Object.values(SocialLoginPlatforms) }) })
   @ApiProperty({
     description: '플랫폼',
     enum: SocialLoginPlatforms,
