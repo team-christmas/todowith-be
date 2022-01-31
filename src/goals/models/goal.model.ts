@@ -33,6 +33,7 @@ export class Goal extends Model {
   @AllowNull(false)
   @Default(GoalColors.GRAY)
   @Column({ type: DataType.ENUM({ values: Object.values(GoalColors) }) })
+  @ApiProperty({ description: '목표 색상' })
   color: GoalColors;
 
   @AllowNull(false)
